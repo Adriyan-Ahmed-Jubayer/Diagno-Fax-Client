@@ -7,7 +7,7 @@ const Navbar = () => {
     ]
     return (
         <>
-            <div className="navbar py-3 md:py-4 lg:py-6">
+            <div className="navbar py-3 md:py-4 lg:py-6 relative bg-white z-10">
                 <div className="navbar-start">
                     <div className="dropdown xl:hidden flex ">
                         <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -54,7 +54,6 @@ const Navbar = () => {
                     <Link to='/login'>
                         <button className="bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD]  py-2 md:py-3 px-3 md:px-6 lg:px-9 text-white font-bold text-xs md:text-sm  rounded">LOGIN</button>
                     </Link>
-
                 </div>
             </div>
         </>

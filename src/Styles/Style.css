@@ -4,3 +4,14 @@
 .roboto {
     font-family: 'Roboto', sans-serif;
 }
+
+.rotate {
+    transform: rotate(45);
+}
+
+.text-design {
+    background: linear-gradient(90deg,#8D53FD, #9E6EFD);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
