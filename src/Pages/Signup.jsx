@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import { BsGoogle } from "react-icons/bs"
+import { useContext } from "react";
+import { AuthContext } from "../Context/Authenticate";
+import { toast } from "react-toastify";
 
 
 const Signup = () => {
+    const { CreateAccount } = useContext(AuthContext);
 
     const handleRegister = e => {
         e.preventDefault()
@@ -13,19 +17,6 @@ const Signup = () => {
         const name = form.name.value;
         if (pass.length < 6) {
             toast.error('The password is less than 6 characters', {
-                position: 'top-center'
-            })
-            return;
-        }
-        if (!CpLetterRgx.test(pass)) {
-            toast.error("The password don't have a capital letter", {
-                position: 'top-center'
-            })
-            return;
-        }
-
-        if (!SpCrtrRgx.test(pass)) {
-            toast.error("The password don't have a special character", {
                 position: 'top-center'
             })
             return;
