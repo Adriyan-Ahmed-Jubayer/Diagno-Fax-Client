@@ -2,9 +2,36 @@ import { Link } from "react-router-dom";
 import { BsGoogle } from "react-icons/bs"
 import { useContext } from "react";
 import { AuthContext } from "../Context/Authenticate";
+import { toast } from "react-toastify";
 
 const Signin = () => {
-    const {GoogleLogin} = useContext(AuthContext)
+    const {LoginAccount,GoogleLogin} = useContext(AuthContext)
+    const handleLogin = e => {
+        e.preventDefault()
+        const form = e.target;
+        const email = form.email.value;
+        const pass = form.pass.value;
+        LoginAccount(email, pass)
+            .then(res => {
+                if (res) {
+                    toast.success('Login successful! You now have access. 🎉😊', {
+                        position: "top-center"
+                    })
+                    form.reset();
+                }
+            })
+            .catch(err => {
+                if (err.message == 'Firebase: Error (auth/network-request-failed).') {
+                    toast.error('Your Network Connection is Too Slow!')
+                }
+                else {
+                    toast.error(err.message, {
+                        position: "top-center"
+                    })
+
+                }
+            })
+    }
     const handleGGLLogin = () => {
         GoogleLogin()
             .then(res => {
