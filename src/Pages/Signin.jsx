@@ -1,7 +1,23 @@
 import { Link } from "react-router-dom";
 import { BsGoogle } from "react-icons/bs"
+import { useContext } from "react";
+import { AuthContext } from "../Context/Authenticate";
 
 const Signin = () => {
+    const {GoogleLogin} = useContext(AuthContext)
+    const handleGGLLogin = () => {
+        GoogleLogin()
+            .then(res => {
+                if (res) {
+                    toast.success('Login successful! You now have access. 🎉😊', {
+                        position: "top-center"
+                    })
+                }
+            })
+            .catch(err => {
+                toast.error(err.message)
+            })
+    }
     return (
         <>
             <section className="flex flex-col md:flex-row items-center justify-center min-h-screen  container mx-auto">
@@ -42,7 +58,7 @@ const Signin = () => {
                             </div>
                         </form>
                         <div className="form-control mt-6">
-                            <button className=" border-[#8D53FD] border-2 py-2 md:py-3 px-3 md:px-6 lg:px-9 text-design font-bold text-xs md:text-sm  rounded flex items-center justify-center gap-2"><BsGoogle className="text-[#8D53FD] text-lg"></BsGoogle>GOOGLE</button>
+                            <button onClick={handleGGLLogin} className=" border-[#8D53FD] border-2 py-2 md:py-3 px-3 md:px-6 lg:px-9 text-design font-bold text-xs md:text-sm  rounded flex items-center justify-center gap-2"><BsGoogle className="text-[#8D53FD] text-lg"></BsGoogle>GOOGLE</button>
                         </div>
                     </div>
                 </div>
