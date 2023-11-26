@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { LuDollarSign } from "react-icons/lu";
 
 const Details = () => {
     const { id } = useParams();
@@ -20,7 +21,7 @@ const Details = () => {
         <>
             <div className="flex-1 border border-teal-500 p-5 rounded space-y-5 container mx-auto">
                 <div>
-                    <img src={image} alt="" />
+                    <img className="w-full" src={image} alt="" />
                 </div>
                 <div className="flex items-center justify-between">
                     <div className="space-y-3">
@@ -36,6 +37,7 @@ const Details = () => {
                 </div>
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
+                        <LuDollarSign className="font-bold text-3xl"></LuDollarSign>
                         <h1 className="text-sm md:text-base lg:text-lg font-bold ">{price}</h1>
                     </div>
                     <div>
@@ -43,7 +45,7 @@ const Details = () => {
                     </div>
                 </div>
                 <div className="flex items-center justify-center">
-                    <button className="bg-gradient-to-l from-[#0FCFEC] to-[#19D3AE]  py-3 md:py-3 px-9 md:px-8 lg:px-9 text-white font-bold text-xs md:text-sm  rounded">BOOK</button>
+                    <button className="bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD]  py-2 md:py-3 px-3 md:px-6 lg:px-9 text-white font-bold text-xs md:text-sm  rounded">BOOK</button>
                 </div>
             </div>
         </>
