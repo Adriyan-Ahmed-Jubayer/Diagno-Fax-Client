@@ -9,8 +9,11 @@ const Authenticate = ({ children }) => {
     const [isLoading, setIsLoading] = useState(true)
     const CreateAccount = (email, password) => {
         setIsLoading(true);
-        console.log(User);
         return createUserWithEmailAndPassword(auth, email, password);
+    }
+    const GoogleLogin = () => {
+        const GGLProvider = new GoogleAuthProvider
+        return signInWithPopup(auth, GGLProvider)
     }
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, userAccount => {
@@ -24,6 +27,7 @@ const Authenticate = ({ children }) => {
     const AuthMethods = {
         User,
         CreateAccount,
+        GoogleLogin,
     }
     return (
         <AuthContext.Provider value={AuthMethods}>
