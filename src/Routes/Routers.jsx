@@ -5,6 +5,8 @@ import Root from '../Layouts/Root';
 import TestList from '../Pages/TestList';
 import Details from '../Pages/Details';
 import Signin from '../Pages/Signin';
+import Authentication from '../Layouts/Authentication';
+import Signup from '../Pages/Signup';
 
 const Routers = createBrowserRouter([
     {
@@ -23,9 +25,19 @@ const Routers = createBrowserRouter([
                 path: "/details/:id",
                 element: <Details></Details>,
             },
+        ]
+    },
+    {
+        path: "/authentication",
+        element: <Authentication></Authentication>,
+        children: [
             {
-                path: "/signin",
+                path: "/authentication/signin",
                 element: <Signin></Signin>,
+            },
+            {
+                path: "/authentication/signup",
+                element: <Signup></Signup>
             },
         ]
     },

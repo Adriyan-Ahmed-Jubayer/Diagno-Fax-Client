@@ -51,7 +51,7 @@ const Navbar = () => {
                             <li onClick={() => LogOutAccount().then(res => toast.success('Log Out Successful !! 👌'))} className="bg-transparent py-2 md:py-2 md:px-2 font-bold text-xs md:text-sm btn-ghost rounded"><Link>Logout</Link></li>
                         </ul>
                     </div>
-                    <Link to='/signin'>
+                    <Link to='/authenticationin/signin'>
                         <button className="bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD]  py-2 md:py-3 px-3 md:px-6 lg:px-9 text-white font-bold text-xs md:text-sm  rounded">LOGIN</button>
                     </Link>
                 </div>
