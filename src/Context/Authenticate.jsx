@@ -19,6 +19,11 @@ const Authenticate = ({ children }) => {
         setIsLoading(true)
         return signInWithEmailAndPassword(auth, email, password);
     }
+    const LogOutAccount = () => {
+        setIsLoading(true)
+
+        return signOut(auth);
+    }
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, userAccount => {
             setUser(userAccount)
@@ -32,6 +37,8 @@ const Authenticate = ({ children }) => {
         User,
         CreateAccount,
         GoogleLogin,
+        LoginAccount,
+        LogOutAccount,
     }
     return (
         <AuthContext.Provider value={AuthMethods}>

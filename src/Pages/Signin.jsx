@@ -58,7 +58,7 @@ const Signin = () => {
                         <p className="text-[12px] md:text-[14px] lg:text-[16px] leading-5 md:leading-7 lg:leading-8 font-medium text-gray-500">Log in to Your MEDIFAX Account to Access Your Health Checkup Guide or Dashboard.</p>
                     </div>
                     <div className="card-body w-11/12 md:w-full lg:w-10/12 xl:w-9/12 mx-auto">
-                        <form className="">
+                        <form onSubmit={handleLogin} className="">
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text dark:text-gray-300">Email</span>
