@@ -3,9 +3,54 @@ import { BsGoogle } from "react-icons/bs"
 
 
 const Signup = () => {
+
+    const handleRegister = e => {
+        e.preventDefault()
+        const form = e.target;
+        const email = form.email.value;
+        const pass = form.pass.value;
+        const photo = form.photo.value;
+        const name = form.name.value;
+        if (pass.length < 6) {
+            toast.error('The password is less than 6 characters', {
+                position: 'top-center'
+            })
+            return;
+        }
+        if (!CpLetterRgx.test(pass)) {
+            toast.error("The password don't have a capital letter", {
+                position: 'top-center'
+            })
+            return;
+        }
+
+        if (!SpCrtrRgx.test(pass)) {
+            toast.error("The password don't have a special character", {
+                position: 'top-center'
+            })
+            return;
+        }
+        CreateAccount(email, pass)
+            .then(res => {
+                if (res.user.email) {
+                    updatingProfile(res, name, photo)
+                    toast.success('Congratulations ! Registration completed Successfully ! 🤩💕')
+                    form.reset();
+                }
+            })
+            .catch(err => {
+                if (err.message == "Firebase: Error (auth/email-already-in-use).") {
+                    toast.error("The Email already in use")
+                }
+                else {
+                    toast.error(err.message);
+                }
+            })
+
+    }
     return (
         <>
-            <section className="flex flex-col md:flex-row items-center justify-center min-h-screen">
+            <section className="flex flex-col md:flex-row items-center justify-center min-h-screen  container mx-auto">
                 <div className="flex-1">
                     <img className="w-full" src="https://i.ibb.co/KhNyQ8T/gdpr-concept-illustration-114360-1028-removebg-preview.png" alt="" />
                 </div>
@@ -16,7 +61,7 @@ const Signup = () => {
                         <p className="text-[12px] md:text-[14px] lg:text-[16px] leading-5 md:leading-7 lg:leading-8 font-medium ">Unlock a World of Opportunities – Sign Up for Your JOB CRACKER Account Today! Job Seekers and Employers, Get Started Here.</p>
                     </div>
                     <div className="card-body w-11/12 md:w-full lg:w-10/12 xl:w-9/12 mx-auto">
-                        <form>
+                        <form onSubmit={handleRegister}>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text dark:text-gray-300">Name</span>
@@ -55,7 +100,7 @@ const Signup = () => {
                             </div>
                         </form>
                         <div className="form-control mt-6">
-                            <button className=" btn-border py-2 md:py-3 px-3 md:px-6 lg:px-9 text-design font-bold text-xs md:text-sm  rounded flex items-center justify-center gap-2"><BsGoogle className="text-teal-400 text-lg"></BsGoogle>GOOGLE</button>
+                            <button className="border-[#8D53FD] border-2 py-2 md:py-3 px-3 md:px-6 lg:px-9 text-design font-bold text-xs md:text-sm  rounded flex items-center justify-center gap-2"><BsGoogle className="text-teal-400 text-lg"></BsGoogle>GOOGLE</button>
                         </div>
                     </div>
                 </div>

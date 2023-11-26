@@ -4,7 +4,7 @@ import { BsGoogle } from "react-icons/bs"
 const Signin = () => {
     return (
         <>
-            <section className="flex flex-col md:flex-row items-center justify-center min-h-screen">
+            <section className="flex flex-col md:flex-row items-center justify-center min-h-screen  container mx-auto">
                 <div className="flex-1">
                     <img className="w-full" src="https://img.freepik.com/free-vector/user-verification-unauthorized-access-prevention-private-account-authentication-cyber-security-people-entering-login-password-safety-measures_335657-3530.jpg?w=740&t=st=1700995211~exp=1700995811~hmac=1d4d3ff89490cf7aaa1e9beb413f9206b00ffba21d0c4217573f6a9d201ec537" alt="" />
                 </div>
