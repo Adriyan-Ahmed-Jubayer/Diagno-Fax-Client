@@ -3,82 +3,92 @@ import { BsGoogle } from "react-icons/bs"
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/Authenticate";
 import { toast } from "react-toastify";
-import axios from "axios";
 import usePublicApi from "../Hooks/usePublicApi";
+import { useForm } from 'react-hook-form';
 
-const image_hosting_key = import.meta.env.VITE_iMAGE_HOSTING_KEY
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY
 const imageHostingApi = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 const Signup = () => {
+    const { register, handleSubmit, reset } = useForm();
     const [District, setDistrict] = useState([])
     const [Upzila, setUpzila] = useState([])
     const PublicKey = usePublicApi();
 
-   useEffect(() => {
-    fetch('http://localhost:5000/districts')
-    .then(res => res.json())
-    .then(data => setDistrict(data))
-    fetch('http://localhost:5000/upozilas')
-    .then(res => res.json())
-    .then(data => setUpzila(data))
+    useEffect(() => {
+        fetch('http://localhost:5000/districts')
+            .then(res => res.json())
+            .then(data => setDistrict(data))
+        fetch('http://localhost:5000/upozilas')
+            .then(res => res.json())
+            .then(data => setUpzila(data))
 
-   },[])
+    }, [])
     const { CreateAccount, GoogleLogin, updatingProfile } = useContext(AuthContext);
 
-    const handleRegister = async (e)=> {
-        e.preventDefault();
-        const form = e.target;
-        const email = form.email.value;
-        const pass = form.pass.value;
-        const confirm_pass = form.confirm_pass.value;
-        const photo = form.photo.value;
-        const upzila = form.upzila.value;
-        const blood_group = form.blood_group.value;
-        const district = form.district.value;
-        const name = form.name.value;
-        const status = 'active';
-        if(!pass === confirm_pass){
+    const handleRegister = async (data) => {
+        console.log(data);
+        if (!data.pass === data.confirm_pass) {
             toast.error('Please provide same password word in both password field')
             return
         }
-
-        const user = {name, email, pass, blood_group, district, upzila, status, photo }
-        console.log(user);
-        const file = {image: photo};
+        const file = { image: data.image[0] };
         const res = await PublicKey.post(imageHostingApi, file, {
             headers: {
                 'content-type': 'multipart/form-data'
             }
         })
-        console.log(res.data)
-        // if (pass.length < 6) {
-        //     toast.error('The password is less than 6 characters', {
-        //         position: 'top-center'
-        //     })
-        //     return;
-        // }
-        // CreateAccount(email, pass)
-        //     .then(res => {
-        //         if (res.user.email) {
-        //             updatingProfile(res, name, photo)
-        //             fetch('http://localhost:5000/users', {
-        //                 method: "POST",
-        //                 headers: {
-        //                     'content-type' : 'application/json'
-        //                 },
-        //                 body: JSON.stringify()
-        //             })
-        //             toast.success('Congratulations ! Registration completed Successfully ! 🤩💕')
-        //             form.reset();
-        //         }
-        //     })
-        //     .catch(err => {
-        //         if (err.message == "Firebase: Error (auth/email-already-in-use).") {
-        //             toast.error("The Email already in use")
-        //         }
-        //         else {
-        //             toast.error(err.message);
-        //         }
-        //     })
+        console.log(res.data);
+        const status = 'active'
+        if (data.pass.length < 6) {
+            toast.error('The password is less than 6 characters', {
+                position: 'top-center'
+            })
+            return;
+        }
+        if (res.data.success) {
+            CreateAccount(data.email, data.pass)
+                .then(response => {
+                    console.log(response);
+                    console.log(response.user.email);
+                    console.log(data.name, res.data.data.display_url);
+                    if (response.user.email) {
+                        updatingProfile( response, data.name, res.data.data.display_url)
+                            const user = {
+                                name: data.name,
+                                email: data.email,
+                                pass: data.pass,
+                                blood_group: data.blood_grp,
+                                district: data.district,
+                                upozila: data.upozila,
+                                status,
+                                image: res.data.data.display_url
+                            }
+                            fetch('http://localhost:5000/users', {
+                                method: "POST",
+                                headers: {
+                                    'content-type': 'application/json'
+                                },
+                                body: JSON.stringify(user)
+                            })
+                            .then(res => res.json())
+                            .then(data => {
+                                if(data){
+                                    toast.success("Account Created Successfully")
+                                }
+                            })
+                    }
+                })
+                .catch(err => {
+                    if (err.message == "Firebase: Error (auth/email-already-in-use).") {
+                        toast.error("The Email already in use")
+                    }
+                    else {
+                        console.log(err);
+                        toast.error(err.message);
+                    }
+                })
+        }
 
     }
     const handleGGLLogin = () => {
@@ -107,24 +117,24 @@ const Signup = () => {
                         <p className="text-[12px] md:text-[14px] lg:text-[16px] leading-5 md:leading-7 lg:leading-8 font-medium roboto">Unlock a World of Opportunities – Sign Up for Your Personal Diagnostic Account Today! , Get Started Here.</p>
                     </div>
                     <div className="card-body w-11/12 md:w-full lg:w-10/12 xl:w-9/12 mx-auto">
-                        <form className="inter" onSubmit={handleRegister}>
+                        <form className="inter" onSubmit={handleSubmit(handleRegister)}>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text ">Name</span>
                                 </label>
-                                <input type="text" name="name" placeholder="Enter Your Name" className="input input-bordered" required />
+                                <input type="text" {...register('name', { required: true })} placeholder="Enter Your Name" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text ">Photo</span>
                                 </label>
-                                <input type="file" name="photo" placeholder="Enter Your Photo URL" className="input input-bordered" required />
+                                <input type="file" {...register('image', { required: true })} placeholder="Enter Your Photo URL" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text ">Blood Group</span>
                                 </label>
-                                <select name="blood_group" defaultValue={'A+'} className="input input-bordered">
+                                <select {...register('blood_grp', { required: true })} defaultValue={'A+'} className="input input-bordered">
                                     <option value="A+">A+</option>
                                     <option value="A+">A-</option>
                                     <option value="A+">B+</option>
@@ -139,9 +149,9 @@ const Signup = () => {
                                 <label className="label">
                                     <span className="label-text ">District</span>
                                 </label>
-                                <select name="district" defaultValue={'Pirojpur'} className="input input-bordered" required>
+                                <select {...register('district', { required: true })} defaultValue={'Pirojpur'} className="input input-bordered" required>
                                     {
-                                        District?.map(item => <option key={item.id} value={item.name}>{item.name}</option> )
+                                        District?.map(item => <option key={item.id} value={item.name}>{item.name}</option>)
                                     }
                                 </select>
                             </div>
@@ -149,9 +159,9 @@ const Signup = () => {
                                 <label className="label">
                                     <span className="label-text ">Upzila</span>
                                 </label>
-                                <select name="upzila" defaultValue={'Barura'} className="input input-bordered" required>
+                                <select {...register('upozila', { required: true })} defaultValue={'Barura'} className="input input-bordered" required>
                                     {
-                                        Upzila?.map(item => <option key={item.id} value={item.name}>{item.name}</option> )
+                                        Upzila?.map(item => <option key={item.id} value={item.name}>{item.name}</option>)
                                     }
                                 </select>
                             </div>
@@ -159,24 +169,24 @@ const Signup = () => {
                                 <label className="label">
                                     <span className="label-text ">Email</span>
                                 </label>
-                                <input type="email" name="email" placeholder="Enter Your E-mail" className="input input-bordered" required />
+                                <input type="email" {...register('email', { required: true })} placeholder="Enter Your E-mail" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text ">Password</span>
                                 </label>
-                                <input type="password" name="pass" placeholder="Enter Your Password" className="input input-bordered" required />
+                                <input type="password" {...register('pass', { required: true })} placeholder="Enter Your Password" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text ">Password</span>
                                 </label>
-                                <input type="password" name="confirm_pass" placeholder="Confirm Your Password" className="input input-bordered" required />
+                                <input type="password" {...register('confirm_pass', { required: true })} placeholder="Confirm Your Password" className="input input-bordered" required />
                             </div>
                             <div className="form-control mt-6">
                                 <button className="bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD]  py-2 md:py-3 px-3 md:px-6 lg:px-9 text-white font-bold text-xs md:text-sm  rounded">CREATE ACCOUNT</button>
                             </div>
-                            <h3 className="text-center mt-2 roboto">Don't Have an Accout ? <Link className="text-design font-bold" to='/authentication/signin'>LOGIN </Link> </h3>
+                            <h3 className="text-center mt-2 roboto">Don't Have an Account ? <Link className="text-design font-bold" to='/authentication/signin'>LOGIN </Link> </h3>
                             <div className="flex items-center gap-2 mt-3">
                                 <div className="bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD] h-1 w-full"></div>
                                 <h5>OR</h5>
