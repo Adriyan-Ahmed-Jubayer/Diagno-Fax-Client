@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
+import { LuDollarSign } from "react-icons/lu";
+import { MdMan } from "react-icons/md";
+import { CiCalendar } from "react-icons/ci";
 
 const MediCard = ({ test }) => {
-    const { _id, name, price, description, image, available_slots } = test;
+    const { _id, name, price, description, image, available_slots, available_date } = test;
     return (
         <>
             <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className="p-5 btn-border lg:flex lg:gap-6 border-[#8D53FD] border rounded-md ">
@@ -11,7 +14,11 @@ const MediCard = ({ test }) => {
                 <div className="lg:flex-1 space-y-2 md:space-y-4 lg:space-y-5 md:mt-2 lg:mt-0">
                     <h1 className="text-sm md:text-xl lg:text-xl font-bold card-title-design inline-block "> {name} </h1>
                     <div className="space-y-2 md:space-y-4 lg:space-y-3">
-                        <h1 className="text-sm md:text-base lg:text-xl font-bold flex items-center gap-2 "><span className="font-medium"></span> {price}</h1>
+                        <div className="flex items-center justify-between">
+                            <h1 className="text-sm md:text-base lg:text-xl font-bold flex items-center gap-2 "><span className="font-medium"><LuDollarSign></LuDollarSign></span> {price}</h1>
+                            <h1 className="text-sm md:text-base lg:text-xl font-bold flex items-center gap-2 "><span className="font-medium"><MdMan></MdMan></span> {available_slots}</h1>
+                        </div>
+                        <h1 className="text-sm md:text-base lg:text-xl font-bold flex items-center gap-2 "><span className="font-medium"><CiCalendar /></span> {available_date} Days</h1>
                         <div>
                             <p>{description && description.slice(0, 120)} ...</p>
                         </div>

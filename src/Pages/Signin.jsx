@@ -28,7 +28,6 @@ const Signin = () => {
                     toast.error(err.message, {
                         position: "top-center"
                     })
-
                 }
             })
     }
@@ -61,13 +60,13 @@ const Signin = () => {
                         <form onSubmit={handleLogin} className="">
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text dark:text-gray-300">Email</span>
+                                    <span className="label-text ">Email</span>
                                 </label>
                                 <input type="email" name="email" placeholder="Enter Your E-mail" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text dark:text-gray-300">Password</span>
+                                    <span className="label-text ">Password</span>
                                 </label>
                                 <input type="password" name="pass" placeholder="Enter Your Password" className="input input-bordered" required />
                                 <label className="label">

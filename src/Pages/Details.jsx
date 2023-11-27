@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { LuDollarSign } from "react-icons/lu";
+import { MdMan } from "react-icons/md";
 
 const Details = () => {
     const { id } = useParams();
@@ -15,8 +16,47 @@ const Details = () => {
     useEffect(() => {
         Test();
     }, [])
-    const { name, price, description, image, available_slots, available_date } = data;
-    console.log(data);
+    const { _id, name, price, description, image, available_slots, available_date } = data;
+
+
+    const handleBook = () => {
+        if(available_slots == 0 || available_date < 0){
+            toast.info('Sorry ! Slots Unavailable')
+            return
+        }
+        const report = 'pending'
+        const bookedTest = {...data, report}
+        delete bookedTest._id
+        console.log(bookedTest);
+        fetch('http://localhost:5000/booked', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(bookedTest)
+        })
+        .then(res => res.json())
+        .then( data => {
+            console.log(data);
+            if(data.insertedId){
+                fetch(`http://localhost:5000/booked?id=${_id}`, {
+                    method: "PUT",
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({$inc: {available_slots: -1 }})
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if(data){
+                            toast.success('Your Test Booked Successfully')
+                            Test()
+                        }
+                    })
+            }
+        })
+    }
     return (
         <>
             <div className="flex-1 border border-teal-500 p-5 rounded space-y-5 container mx-auto">
@@ -40,12 +80,13 @@ const Details = () => {
                         <LuDollarSign className="font-bold text-3xl"></LuDollarSign>
                         <h1 className="text-sm md:text-base lg:text-lg font-bold ">{price}</h1>
                     </div>
-                    <div>
+                    <div className="flex items-center justify-between">
+                        <MdMan  className="font-bold text-3xl"></MdMan>
                         <h1 className="text-sm md:text-base lg:text-lg font-bold ">{available_slots}</h1>
                     </div>
                 </div>
                 <div className="flex items-center justify-center">
-                    <button className="bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD]  py-2 md:py-3 px-3 md:px-6 lg:px-9 text-white font-bold text-xs md:text-sm  rounded">BOOK</button>
+                    <button onClick={handleBook} className="bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD]  py-2 md:py-3 px-3 md:px-6 lg:px-9 text-white font-bold text-xs md:text-sm  rounded">BOOK NOW</button>
                 </div>
             </div>
         </>
