@@ -13,7 +13,7 @@ const Root = () => {
             <main className="max-w-[1920px] mx-auto space-y-16 md:space-y-24 lg:space-y-32 xl:space-y-48">
                 <Outlet></Outlet>
             </main>
-            <footer className="max-w-[1920px] mx-auto">
+            <footer className="max-w-[1920px] mx-auto mt-16 md:mt-24">
                 <Footer></Footer>
             </footer>
             <section>
