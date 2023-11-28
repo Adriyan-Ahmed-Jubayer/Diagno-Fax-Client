@@ -14,9 +14,6 @@ const Signup = () => {
     const [District, setDistrict] = useState([])
     const [Upzila, setUpzila] = useState([])
     const PublicKey = usePublicApi();
-    const navigate = () => {
-         navigation( "/" )
-    }
 
     useEffect(() => {
         fetch('http://localhost:5000/districts')
@@ -43,6 +40,7 @@ const Signup = () => {
         })
         console.log(res.data);
         const status = 'active'
+        const role = 'user'
         if (data.pass.length < 6) {
             toast.error('The password is less than 6 characters', {
                 position: 'top-center'
@@ -65,6 +63,7 @@ const Signup = () => {
                                 district: data.district,
                                 upozila: data.upozila,
                                 status,
+                                role,
                                 image: res.data.data.display_url
                             }
                             fetch('http://localhost:5000/users', {
@@ -78,7 +77,7 @@ const Signup = () => {
                             .then(data => {
                                 if(data){
                                     toast.success("Account Created Successfully")
-                                    navigate();
+                                    return <Navigate to="/dashboard"></Navigate>
                                 }
                             })
                     }
@@ -199,7 +198,7 @@ const Signup = () => {
                             </div>
                         </form>
                         <div className="form-control mt-6">
-                            <button onClick={handleGGLLogin} className="border-[#8D53FD] border-2 py-2 md:py-3 px-3 md:px-6 lg:px-9 text-design font-bold text-xs md:text-sm  rounded flex items-center justify-center gap-2"><BsGoogle className="text-[#8D53FD] text-lg"></BsGoogle>GOOGLE</button>
+                            <button onClick={handleGGLLogin} className="border-[#8D53FD] w-full border-2 py-2 md:py-3 px-3 md:px-6 lg:px-9 text-design font-bold text-xs md:text-sm  rounded flex items-center justify-center gap-2"><BsGoogle className="text-[#8D53FD] text-lg"></BsGoogle>GOOGLE</button>
                         </div>
                     </div>
                 </div>

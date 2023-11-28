@@ -7,8 +7,10 @@ import Details from '../Pages/Details';
 import Signin from '../Pages/Signin';
 import Authentication from '../Layouts/Authentication';
 import Signup from '../Pages/Signup';
-import Protection from '../Protection/Protection';
+import Protection from '../Providers/Protection/Protection';
 import Dashboard from '../Layouts/Dashboard';
+import Profile from '../Pages/Profile';
+import Appointments from '../Pages/Appointments';
 
 const Routers = createBrowserRouter([
     {
@@ -46,6 +48,16 @@ const Routers = createBrowserRouter([
     {
         path: "/dashboard",
         element: <Protection><Dashboard></Dashboard></Protection>,
+        children: [
+            {
+                path: "profile",
+                element: <Profile></Profile>,
+            },
+            {
+                path: "/dashboard/appointments",
+                element: <Appointments></Appointments>,
+            },
+        ]
     },
 ]);
 

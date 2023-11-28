@@ -1,11 +1,13 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { LuDollarSign } from "react-icons/lu";
 import { MdMan } from "react-icons/md";
+import { AuthContext } from "../Context/Authenticate";
 
 const Details = () => {
+    const {User} = useContext(AuthContext);
     const { id } = useParams();
     const [data, setData] = useState({});
     const Test = () => {
@@ -24,8 +26,11 @@ const Details = () => {
             toast.info('Sorry ! Slots Unavailable')
             return
         }
-        const report = 'pending'
-        const bookedTest = {...data, report}
+        const report = 'pending';
+        const email = User.email;
+        const user_name = User.displayName;
+        const booking_date = new Date().toISOString().slice(0, 10)
+        const bookedTest = {...data, report, email, user_name, booking_date}
         delete bookedTest._id
         console.log(bookedTest);
         fetch('http://localhost:5000/booked', {

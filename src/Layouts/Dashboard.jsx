@@ -1,12 +1,15 @@
 import { useContext } from "react";
 import { AuthContext } from "../Context/Authenticate";
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { RiMenu4Line } from "react-icons/ri";
+import { VscAccount } from "react-icons/vsc";
+import { VscChecklist } from "react-icons/vsc";
+import { BsJournalCheck } from "react-icons/bs";
 
 const Dashboard = () => {
     const { User, LogOutAccount } = useContext(AuthContext);
     return (
-        <>
+        <section className="lg:container mx-auto">
             <div className="navbar py-3 md:py-4 lg:py-6 relative bg-white max-w-[1920px] mx-auto">
                 <div className="navbar-start gap-3">
                 <label htmlFor="my-drawer-2" className="btn btn-ghost lg:hidden"><RiMenu4Line /></label>
@@ -18,11 +21,11 @@ const Dashboard = () => {
                             <div className="dropdown dropdown-end">
                                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                     <div className="w-10 rounded-full">
-                                        <img src="" />
+                                        <img src={User.photoURL} />
                                     </div>
                                 </label>
                                 <ul tabIndex={0} className=" dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded w-52">
-                                    <li className="bg-transparent py-2 md:py-2 md:px-2 font-bold text-xs md:text-sm  rounded"> Nothing</li>
+                                    <li className="bg-transparent py-2 md:py-2 md:px-2 font-bold text-xs md:text-sm  rounded"> {User.displayName}</li>
                                     <li className="bg-transparent py-2 md:py-2 md:px-2 font-bold text-xs md:text-sm  rounded">
                                         <Link className="justify-between">
                                             Profile
@@ -41,24 +44,25 @@ const Dashboard = () => {
                     }
                 </div>
             </div>
-            <div className="lg:drawer-open lg:flex lg:flex-row-reverse  max-w-[1920px] mx-auto">
+            <div className="lg:drawer-open lg:flex lg:flex-row-reverse gap-8  max-w-[1920px] mx-auto">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <main className="max-w-[1920px] w-full mx-auto space-y-16 md:space-y-24 lg:space-y-32 xl:space-y-48">
                     {/* Page content here */}
                     <Outlet></Outlet>
                     
                 </main>
-                <div className="drawer-side">
+                <div className="drawer-side rounded-lg">
                     <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+                    <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content roboto space-y-4">
                         {/* Sidebar content here */}
-                        <li><a>Sidebar Item 1</a></li>
-                        <li><a>Sidebar Item 2</a></li>
+                        <NavLink className={({ isActive }) => isActive ? `bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD]  py-2 md:py-2.5 px-3 md:px-5 lg:px-5 text-white font-bold text-xs md:text-sm  rounded flex items-center gap-3` : `bg-transparent py-2 md:py-2 md:px-2 font-bold text-xs md:text-sm  rounded flex items-center gap-3`} to="/dashboard/profile" ><VscAccount className="text-xl"></VscAccount> MY PROFILE</NavLink>
+                        <NavLink className={({ isActive }) => isActive ? `bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD]  py-2 md:py-2.5 px-3 md:px-5 lg:px-5 text-white font-bold text-xs md:text-sm  rounded flex items-center gap-3` : `bg-transparent py-2 md:py-2 md:px-2 font-bold text-xs md:text-sm  rounded flex items-center gap-3`} to="/dashboard/appointments" ><VscChecklist className="text-xl"></VscChecklist>UPCOMING APPOINTMENTS</NavLink>
+                        <NavLink className={({ isActive }) => isActive ? `bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD]  py-2 md:py-2.5 px-3 md:px-5 lg:px-5 text-white font-bold text-xs md:text-sm  rounded flex items-center gap-3` : `bg-transparent py-2 md:py-2 md:px-2 font-bold text-xs md:text-sm  rounded flex items-center gap-3`} to="/dashboard/results" ><BsJournalCheck className="text-xl"></BsJournalCheck>TEST RESULTS</NavLink>
                     </ul>
 
                 </div>
             </div>
-        </>
+        </section>
     );
 };
 
