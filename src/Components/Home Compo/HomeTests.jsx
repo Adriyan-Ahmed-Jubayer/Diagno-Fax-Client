@@ -6,23 +6,19 @@ const HomeTests = () => {
     const [MostBooked, setMostBooked] = useState([]);
     useEffect(() => {
         fetch('http://localhost:5000/booked')
-        .then(res => res.json())
-        .then(data => setMostBooked(data))
+            .then(res => res.json())
+            .then(data => setMostBooked(data))
     }, [])
-    console.log(MostBooked);
     const Data = Array.from(new Set(MostBooked.map(item => item.name)))
         .map(name => MostBooked.find(item => item.name === name));
-        console.log(uniqueData);
     return (
         <>
-            <div>
-                <div>
-                    <Section_Heading Sub_Title="T E S T S" Title="Featured Tests" Description="Explore our curated collection of featured tests, meticulously designed for accuracy and insight. Elevate your diagnostic experience with cutting-edge precision."></Section_Heading>
-                    <div>
-                        {
-                            Data && Data.slice(0,6).map(item => <HomeCard></HomeCard>)
-                        }
-                    </div>
+            <div className="container mx-auto space-y-6 md:space-y-20">
+                <Section_Heading Sub_Title="T E S T S" Title="Featured Tests" Description="Explore our curated collection of featured tests, meticulously designed for accuracy and insight. Elevate your diagnostic experience with cutting-edge precision."></Section_Heading>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {
+                        Data && Data.slice(0, 6).map(item => <HomeCard key={item._id} item={item}></HomeCard>)
+                    }
                 </div>
             </div>
         </>
