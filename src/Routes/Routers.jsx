@@ -7,6 +7,8 @@ import Details from '../Pages/Details';
 import Signin from '../Pages/Signin';
 import Authentication from '../Layouts/Authentication';
 import Signup from '../Pages/Signup';
+import Protection from '../Protection/Protection';
+import Dashboard from '../Layouts/Dashboard';
 
 const Routers = createBrowserRouter([
     {
@@ -23,7 +25,7 @@ const Routers = createBrowserRouter([
             },
             {
                 path: "/details/:id",
-                element: <Details></Details>,
+                element: <Protection><Details></Details></Protection>,
             },
         ]
     },
@@ -40,6 +42,10 @@ const Routers = createBrowserRouter([
                 element: <Signup></Signup>,
             },
         ]
+    },
+    {
+        path: "/dashboard",
+        element: <Protection><Dashboard></Dashboard></Protection>,
     },
 ]);
 

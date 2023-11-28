@@ -14,6 +14,9 @@ const Signup = () => {
     const [District, setDistrict] = useState([])
     const [Upzila, setUpzila] = useState([])
     const PublicKey = usePublicApi();
+    const navigate = () => {
+         navigation( "/" )
+    }
 
     useEffect(() => {
         fetch('http://localhost:5000/districts')
@@ -75,6 +78,7 @@ const Signup = () => {
                             .then(data => {
                                 if(data){
                                     toast.success("Account Created Successfully")
+                                    navigate();
                                 }
                             })
                     }
@@ -98,6 +102,7 @@ const Signup = () => {
                     toast.success('Login successful! You now have access. 🎉😊', {
                         position: "top-center"
                     })
+                    navigate()
                 }
             })
             .catch(err => {

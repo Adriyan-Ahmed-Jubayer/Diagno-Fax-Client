@@ -5,7 +5,10 @@ import { AuthContext } from "../Context/Authenticate";
 import { toast } from "react-toastify";
 
 const Signin = () => {
-    const {LoginAccount,GoogleLogin} = useContext(AuthContext)
+    const {LoginAccount,GoogleLogin} = useContext(AuthContext);
+    const navigate = () => {
+         navigation( "/" )
+    }
     const handleLogin = e => {
         e.preventDefault()
         const form = e.target;
@@ -18,6 +21,7 @@ const Signin = () => {
                         position: "top-center"
                     })
                     form.reset();
+                    navigate();
                 }
             })
             .catch(err => {
@@ -38,6 +42,7 @@ const Signin = () => {
                     toast.success('Login successful! You now have access. 🎉😊', {
                         position: "top-center"
                     })
+                    navigate()
                 }
             })
             .catch(err => {

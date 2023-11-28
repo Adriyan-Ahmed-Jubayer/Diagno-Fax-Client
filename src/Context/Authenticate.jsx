@@ -42,6 +42,7 @@ const Authenticate = ({ children }) => {
     }, [])
     const AuthMethods = {
         User,
+        isLoading,
         CreateAccount,
         GoogleLogin,
         LoginAccount,
