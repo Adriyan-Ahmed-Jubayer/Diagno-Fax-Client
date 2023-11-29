@@ -11,6 +11,7 @@ import Protection from '../Providers/Protection/Protection';
 import Dashboard from '../Layouts/Dashboard';
 import Profile from '../Pages/Profile';
 import Appointments from '../Pages/Appointments';
+import Users from '../Pages/Users';
 
 const Routers = createBrowserRouter([
     {
@@ -55,7 +56,11 @@ const Routers = createBrowserRouter([
             },
             {
                 path: "/dashboard/appointments",
-                element: <Appointments></Appointments>,
+                element: <Protection><Appointments></Appointments></Protection>,
+            },
+            {
+                path: "/dashboard/all-users",
+                element: <Users></Users>,
             },
         ]
     },

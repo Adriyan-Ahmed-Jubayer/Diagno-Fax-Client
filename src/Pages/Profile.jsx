@@ -15,7 +15,7 @@ const Profile = () => {
     const [Upzila, setUpzila] = useState([])
     const PublicKey = usePublicApi();
     const bringUser = () => {
-        fetch(`http://localhost:5000/user?email=${User.email}`)
+        fetch(`http://localhost:5000/single/user?email=${User.email}`)
             .then(res => res.json())
             .then(data => setUser(data))
     }
@@ -69,6 +69,7 @@ const Profile = () => {
                                 Swal.fire("Saved!", "", "success");
                                 bringUser()
                                 reset()
+                                setShow(!show)
                             }
                         })
                 }
@@ -82,14 +83,14 @@ const Profile = () => {
     }
     return (
         <>
-            <div className="p-5 rounded-lg border-[#8D53FD] border-2 space-y-6">
+            <div className="p-5 rounded-lg border-[#8D53FD] border-2 space-y-6 container mx-auto">
                 <div className="flex justify-between items-center">
                     <h1 className="inter text-xl md:text-2xl font-bold ">MY PROFILE</h1>
                     <button onClick={() => {
                         setShow(!show)
                     }} className=" bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD] text-white py-3 px-6 lg:px-9 font-bold text-xs md:text-sm  rounded flex items-center justify-center inter gap-2">{show ? <><LuClipboardEdit></LuClipboardEdit> EDIT</> : <>DISCARD</>}</button>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 roboto">
                     <div className="w-32 h-32 md:w-52 md:h-52 mx-auto">
                         <img className="rounded-full w-full h-full" src={user.image} alt="" />
                     </div>
@@ -148,13 +149,13 @@ const Profile = () => {
                                     </label>
                                     <select {...register('blood_grp', { required: true })} defaultValue={user.blood_group} className="input input-bordered">
                                         <option value="A+">A+</option>
-                                        <option value="A+">A-</option>
-                                        <option value="A+">B+</option>
-                                        <option value="A+">B-</option>
-                                        <option value="A+">AB+</option>
-                                        <option value="A+">AB-</option>
-                                        <option value="A+">O+</option>
-                                        <option value="A+">O-</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
                                     </select>
                                 </div>
                                 <div className="form-control">

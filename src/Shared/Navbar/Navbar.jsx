@@ -21,7 +21,9 @@ const Navbar = () => {
                             {
                                 Links.map((Link, i) => <li key={i}>{Link}</li>)
                             }
-                            <li><NavLink className={({ isActive }) => isActive ? `bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD]  py-2 md:py-2.5 px-3 md:px-5 lg:px-5 text-white font-bold text-xs md:text-sm  rounded` : `bg-transparent py-2 md:py-2 md:px-2 font-bold text-xs md:text-sm  rounded`} to="/dashboard/profile" >DASHBOARD</NavLink></li>
+                            {
+                                User?.email && <li><NavLink className={({ isActive }) => isActive ? `bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD]  py-2 md:py-2.5 px-3 md:px-5 lg:px-5 text-white font-bold text-xs md:text-sm  rounded` : `bg-transparent py-2 md:py-2 md:px-2 font-bold text-xs md:text-sm  rounded`} to="/dashboard/profile" >DASHBOARD</NavLink></li>
+                            }
                         </ul>
                     </div>
                     <div className="hidden xl:flex">
@@ -30,7 +32,9 @@ const Navbar = () => {
                             {
                                 Links.map((Link, i) => <li key={i}>{Link}</li>)
                             }
-                            <li><NavLink className={({ isActive }) => isActive ? `bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD]  py-2 md:py-2.5 px-3 md:px-5 lg:px-5 text-white font-bold text-xs md:text-sm  rounded` : `bg-transparent py-2 md:py-2 md:px-2 font-bold text-xs md:text-sm  rounded`} to="/dashboard/profile" >DASHBOARD</NavLink></li>
+                            {
+                                User?.email && <li><NavLink className={({ isActive }) => isActive ? `bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD]  py-2 md:py-2.5 px-3 md:px-5 lg:px-5 text-white font-bold text-xs md:text-sm  rounded` : `bg-transparent py-2 md:py-2 md:px-2 font-bold text-xs md:text-sm  rounded`} to="/dashboard/profile" >DASHBOARD</NavLink></li>
+                            }
                         </ul>
                     </div>
                 </div>

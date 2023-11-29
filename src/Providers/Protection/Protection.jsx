@@ -25,7 +25,7 @@ const Protection = ({ children }) => {
         toast.warn('You need to login to access the route', {
             position: "top-center"
         })
-        return <Navigate to="/authentication/login"></Navigate>
+        return <Navigate to="/authentication/signin"></Navigate>
     }
     if (User) {
         return children;

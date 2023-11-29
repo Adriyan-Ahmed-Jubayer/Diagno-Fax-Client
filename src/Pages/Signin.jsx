@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate, useNavigation } from "react-router-dom";
 import { BsGoogle } from "react-icons/bs"
 import { useContext } from "react";
 import { AuthContext } from "../Context/Authenticate";
@@ -6,9 +6,16 @@ import { toast } from "react-toastify";
 
 const Signin = () => {
     const {LoginAccount,GoogleLogin} = useContext(AuthContext);
+
+    const Location = useLocation();
+
+    const navigation = useNavigate();
+
     const navigate = () => {
-         navigation( "/" )
-    }
+        console.log(Location.state);
+         navigation(Location?.state ? "/dashboard/profile" : "/dashboard/profile" )
+    } 
+
     const handleLogin = e => {
         e.preventDefault()
         const form = e.target;

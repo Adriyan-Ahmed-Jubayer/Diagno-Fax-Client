@@ -5,6 +5,12 @@ import { RiMenu4Line } from "react-icons/ri";
 import { VscAccount } from "react-icons/vsc";
 import { VscChecklist } from "react-icons/vsc";
 import { BsJournalCheck } from "react-icons/bs";
+import { RiTeamLine } from "react-icons/ri";
+import { PiTestTubeThin } from "react-icons/pi";
+import { MdAlignHorizontalLeft } from "react-icons/md";
+import { RiReservedLine } from "react-icons/ri";
+import { PiFlagBanner } from "react-icons/pi";
+import { GiTatteredBanner } from "react-icons/gi";
 
 const Dashboard = () => {
     const { User, LogOutAccount } = useContext(AuthContext);
@@ -66,6 +72,16 @@ const Dashboard = () => {
                             <NavLink className={({ isActive }) => isActive ? `bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD] md:py-3.5 md:px-5 text-white font-bold text-xs md:text-sm  rounded flex items-center gap-3` : `bg-transparent md:py-3.5 md:px-5 font-bold text-xs md:text-sm  rounded flex items-center gap-3`} to="/dashboard/profile" ><VscAccount className="text-xl"></VscAccount> MY PROFILE</NavLink>
                             <NavLink className={({ isActive }) => isActive ? `bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD] md:py-3.5 md:px-5 text-white font-bold text-xs md:text-sm  rounded flex items-center gap-3` : `bg-transparent md:py-3.5 md:px-5 font-bold text-xs md:text-sm  rounded flex items-center gap-3`} to="/dashboard/appointments" ><VscChecklist className="text-xl"></VscChecklist>UPCOMING APPOINTMENTS</NavLink>
                             <NavLink className={({ isActive }) => isActive ? `bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD] md:py-3.5 md:px-5 text-white font-bold text-xs md:text-sm  rounded flex items-center gap-3` : `bg-transparent md:py-3.5 md:px-5 font-bold text-xs md:text-sm  rounded flex items-center gap-3`} to="/dashboard/results" ><BsJournalCheck className="text-xl"></BsJournalCheck>TEST RESULTS</NavLink>
+
+
+
+
+                            <NavLink className={({ isActive }) => isActive ? `bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD] md:py-3.5 md:px-5 text-white font-bold text-xs md:text-sm  rounded flex items-center gap-3` : `bg-transparent md:py-3.5 md:px-5 font-bold text-xs md:text-sm  rounded flex items-center gap-3`} to="/dashboard/all-users" ><RiTeamLine className="text-xl"></RiTeamLine>ALL USERS</NavLink>
+                            <NavLink className={({ isActive }) => isActive ? `bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD] md:py-3.5 md:px-5 text-white font-bold text-xs md:text-sm  rounded flex items-center gap-3` : `bg-transparent md:py-3.5 md:px-5 font-bold text-xs md:text-sm  rounded flex items-center gap-3`} to="/dashboard/ add-test" ><PiTestTubeThin className="text-xl"></PiTestTubeThin>ADD TEST</NavLink>
+                            <NavLink className={({ isActive }) => isActive ? `bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD] md:py-3.5 md:px-5 text-white font-bold text-xs md:text-sm  rounded flex items-center gap-3` : `bg-transparent md:py-3.5 md:px-5 font-bold text-xs md:text-sm  rounded flex items-center gap-3`} to="/dashboard/all-tests" ><MdAlignHorizontalLeft className="text-xl"></MdAlignHorizontalLeft>ALL TESTS</NavLink>
+                            <NavLink className={({ isActive }) => isActive ? `bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD] md:py-3.5 md:px-5 text-white font-bold text-xs md:text-sm  rounded flex items-center gap-3` : `bg-transparent md:py-3.5 md:px-5 font-bold text-xs md:text-sm  rounded flex items-center gap-3`} to="/dashboard/reservation" ><RiReservedLine className="text-xl"></RiReservedLine>RESERVATION</NavLink>
+                            <NavLink className={({ isActive }) => isActive ? `bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD] md:py-3.5 md:px-5 text-white font-bold text-xs md:text-sm  rounded flex items-center gap-3` : `bg-transparent md:py-3.5 md:px-5 font-bold text-xs md:text-sm  rounded flex items-center gap-3`} to="/dashboard/ add-banner" ><PiFlagBanner className="text-xl"></PiFlagBanner> ADD BANNER</NavLink>
+                            <NavLink className={({ isActive }) => isActive ? `bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD] md:py-3.5 md:px-5 text-white font-bold text-xs md:text-sm  rounded flex items-center gap-3` : `bg-transparent md:py-3.5 md:px-5 font-bold text-xs md:text-sm  rounded flex items-center gap-3`} to="/dashboard/all-Banners" ><GiTatteredBanner className="text-xl"></GiTatteredBanner>ALL BANNERS</NavLink>
                         </div>
                     </nav>
 

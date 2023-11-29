@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { BsGoogle } from "react-icons/bs"
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/Authenticate";
@@ -15,6 +15,15 @@ const Signup = () => {
     const [Upzila, setUpzila] = useState([])
     const PublicKey = usePublicApi();
 
+    const Location = useLocation();
+
+    const navigation = useNavigate();
+
+    const navigate = () => {
+        console.log(Location.state);
+         navigation(Location?.state ? "/dashboard/profile" : "/dashboard/profile" )
+    }
+
     useEffect(() => {
         fetch('http://localhost:5000/districts')
             .then(res => res.json())
@@ -28,33 +37,30 @@ const Signup = () => {
 
     const handleRegister = async (data) => {
         console.log(data);
-        if (!data.pass === data.confirm_pass) {
-            toast.error('Please provide same password word in both password field')
-            return
-        }
-        const file = { image: data.image[0] };
-        const res = await PublicKey.post(imageHostingApi, file, {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        })
-        console.log(res.data);
-        const status = 'active'
-        const role = 'user'
-        if (data.pass.length < 6) {
-            toast.error('The password is less than 6 characters', {
-                position: 'top-center'
+        if (data.pass === data.confirm_pass) {
+            const file = { image: data.image[0] };
+            const res = await PublicKey.post(imageHostingApi, file, {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
             })
-            return;
-        }
-        if (res.data.success) {
-            CreateAccount(data.email, data.pass)
-                .then(response => {
-                    console.log(response);
-                    console.log(response.user.email);
-                    console.log(data.name, res.data.data.display_url);
-                    if (response.user.email) {
-                        updatingProfile( response, data.name, res.data.data.display_url)
+            console.log(res.data);
+            const status = 'active'
+            const role = 'user'
+            if (data.pass.length < 6 || data.confirm_pass.length < 6) {
+                toast.error('The password is less than 6 characters', {
+                    position: 'top-center'
+                })
+                return;
+            }
+            if (res.data.success) {
+                CreateAccount(data.email, data.pass)
+                    .then(response => {
+                        console.log(response);
+                        console.log(response.user.email);
+                        console.log(data.name, res.data.data.display_url);
+                        if (response.user.email) {
+                            updatingProfile(response, data.name, res.data.data.display_url)
                             const user = {
                                 name: data.name,
                                 email: data.email,
@@ -73,25 +79,31 @@ const Signup = () => {
                                 },
                                 body: JSON.stringify(user)
                             })
-                            .then(res => res.json())
-                            .then(data => {
-                                if(data){
-                                    toast.success("Account Created Successfully")
-                                    return <Navigate to="/dashboard"></Navigate>
-                                }
-                            })
-                    }
-                })
-                .catch(err => {
-                    if (err.message == "Firebase: Error (auth/email-already-in-use).") {
-                        toast.error("The Email already in use")
-                    }
-                    else {
-                        console.log(err);
-                        toast.error(err.message);
-                    }
-                })
+                                .then(res => res.json())
+                                .then(data => {
+                                    if (data) {
+                                        toast.success("Account Created Successfully")
+                                        navigate();
+                                    }
+                                })
+                        }
+                    })
+                    .catch(err => {
+                        if (err.message == "Firebase: Error (auth/email-already-in-use).") {
+                            toast.error("The Email already in use")
+                        }
+                        else {
+                            console.log(err);
+                            toast.error(err.message);
+                        }
+                    })
+            }
         }
+        else {
+            toast.error('Please provide same password word in both password field')
+            return
+        }
+
 
     }
     const handleGGLLogin = () => {
@@ -101,7 +113,6 @@ const Signup = () => {
                     toast.success('Login successful! You now have access. 🎉😊', {
                         position: "top-center"
                     })
-                    navigate()
                 }
             })
             .catch(err => {
@@ -140,13 +151,13 @@ const Signup = () => {
                                 </label>
                                 <select {...register('blood_grp', { required: true })} defaultValue={'A+'} className="input input-bordered">
                                     <option value="A+">A+</option>
-                                    <option value="A+">A-</option>
-                                    <option value="A+">B+</option>
-                                    <option value="A+">B-</option>
-                                    <option value="A+">AB+</option>
-                                    <option value="A+">AB-</option>
-                                    <option value="A+">O+</option>
-                                    <option value="A+">O-</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
                                 </select>
                             </div>
                             <div className="form-control">
@@ -183,7 +194,7 @@ const Signup = () => {
                             </div>
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text ">Password</span>
+                                    <span className="label-text ">Confirm Password</span>
                                 </label>
                                 <input type="password" {...register('confirm_pass', { required: true })} placeholder="Confirm Your Password" className="input input-bordered" required />
                             </div>
