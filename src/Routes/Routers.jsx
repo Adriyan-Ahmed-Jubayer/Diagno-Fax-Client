@@ -16,6 +16,8 @@ import AdminProtector from '../Providers/Admin/AdminProtector';
 import Add_Test from '../Pages/Add_Test';
 import All_Test from '../Pages/All_Test';
 import Error from '../Pages/Error';
+import Edit from '../Pages/Edit';
+import Add_Banner from '../Pages/Add_Banner';
 
 const Routers = createBrowserRouter([
     {
@@ -33,7 +35,7 @@ const Routers = createBrowserRouter([
             },
             {
                 path: "/details/:id",
-                element: <Protection><Details></Details></Protection>,
+                element:<Details></Details>,
             },
         ]
     },
@@ -71,11 +73,19 @@ const Routers = createBrowserRouter([
             },
             {
                 path: "/dashboard/add-test",
-                element: <Add_Test></Add_Test>
+                element: <Add_Test></Add_Test>,
             },
             {
                 path: "/dashboard/all-tests",
-                element: <All_Test></All_Test>
+                element: <All_Test></All_Test>,
+            },
+            {
+                path: "/dashboard/edit-test/:id",
+                element: <Edit></Edit>,
+            },
+            {
+                path: "/dashboard/add-banner",
+                element: <Add_Banner></Add_Banner>,
             },
         ]
     },

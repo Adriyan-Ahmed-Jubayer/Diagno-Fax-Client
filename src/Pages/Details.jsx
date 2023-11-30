@@ -19,7 +19,6 @@ const Details = () => {
     const bringUser = () => {
         axios.get(`http://localhost:5000/singel/users?email=${User.email}`)
             .then(res => setUserData(res.data))
-            .catch(err => toast.error(err?.message ? err.message : err))
     }
     useEffect(() => {
         Test();

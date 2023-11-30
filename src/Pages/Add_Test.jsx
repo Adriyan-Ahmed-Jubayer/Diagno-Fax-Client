@@ -9,14 +9,15 @@ const Add_Test = () => {
         const form = e.target;
         const name = form.name.value;
         const price = form.price.value;
+        const image = form.image.value;
         const valid_data = form.valid_data.value;
-        const available_slots = form.available_slots.value;
+        const available_slots = +form.available_slots.value;
         const description = form.description.value;
         const status = 'pending';
         const poster_name = User?.displayName;
         const poster_email = User?.email;
         const posted_date = new Date().toISOString().slice(0, 10)
-        const test = {name, price, valid_data, available_slots, description, status, posted_date, poster_email, poster_name}
+        const test = {name, price, valid_data, image, available_slots, description, status, posted_date, poster_email, poster_name}
         console.log(test);
         fetch('http://localhost:5000/tests', {
             method: "POST",
@@ -77,7 +78,7 @@ const Add_Test = () => {
                                 </label>
                                 <textarea name="description" className="lg:col-span-2 text-[10px] md:text-base lg:text-lg py-2 md:py-4 rounded-lg px-6 border " rows="8" placeholder="Try To Add 400 Character"></textarea>
                             </div>
-                            <button className=" lg:col-span-3 bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD]   py-3 md:py-3 px-3 md:px-6 lg:px-9 text-white font-bold text-xs md:text-sm  rounded">ADD JOB</button>
+                            <button className=" lg:col-span-3 bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD]   py-3 md:py-3 px-3 md:px-6 lg:px-9 text-white font-bold text-xs md:text-sm  rounded">ADD TEST</button>
                         </form>
                     </div>
                 </div>

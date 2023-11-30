@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { toast } from 'react-toastify';
-import { Circles } from  'react-loader-spinner'
+import { Circles } from 'react-loader-spinner'
 import { AuthContext } from "../../Context/Authenticate";
 import axios from "axios";
 
@@ -9,6 +9,14 @@ const Protection = ({ children }) => {
     const { User, isLoading } = useContext(AuthContext);
     const [userData, setUserData] = useState({})
 
+    useEffect(() => {
+        if (User) {
+            axios.get(`http://localhost:5000/single/user?email=${User?.email}`)
+                .then(res => {
+                    setUserData(res.data)
+                })
+        }
+    }, [User])
 
     if (isLoading) {
         return (<div className="flex justify-center text-purple-600 items-center min-h-screen">
@@ -30,18 +38,14 @@ const Protection = ({ children }) => {
         return <Navigate to="/authentication/signin"></Navigate>
     }
     if (User) {
-        axios.get(`http://localhost:5000/single/user?email=${User?.email}`)
-        .then(res => {
-           setUserData(res.data)
-        })
-        .catch(err => toast.error(err?.message ? err.message : err))
-        if(!userData){
+
+        if (!userData) {
             return <></>
         }
-        if(userData.status === 'active'){
+        if (userData.status === 'active') {
             return children;
         }
-        if(userData.status === 'blocked') {
+        if (userData.status === 'blocked') {
             toast.warn('You are Blocked', {
                 position: "top-center"
             })
