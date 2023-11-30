@@ -26,6 +26,7 @@ const Authenticate = ({ children }) => {
         return signOut(auth);
     }
     const updatingProfile = (res, name, pic) => {
+        setIsLoading(true)
         return updateProfile(res.user, {
             displayName: name,
             photoURL: pic

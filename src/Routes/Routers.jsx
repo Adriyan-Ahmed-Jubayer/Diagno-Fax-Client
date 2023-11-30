@@ -12,6 +12,8 @@ import Dashboard from '../Layouts/Dashboard';
 import Profile from '../Pages/Profile';
 import Appointments from '../Pages/Appointments';
 import Users from '../Pages/Users';
+import AdminProtector from '../Providers/Admin/AdminProtector';
+import Add_Test from '../Pages/Add_Test';
 
 const Routers = createBrowserRouter([
     {
@@ -48,11 +50,11 @@ const Routers = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <Protection><Dashboard></Dashboard></Protection>,
+        element: <Dashboard></Dashboard>,
         children: [
             {
                 path: "profile",
-                element: <Profile></Profile>,
+                element: <Protection><Profile></Profile></Protection>,
             },
             {
                 path: "/dashboard/appointments",
@@ -61,6 +63,10 @@ const Routers = createBrowserRouter([
             {
                 path: "/dashboard/all-users",
                 element: <Users></Users>,
+            },
+            {
+                path: "/dashboard/add-test",
+                element: <Add_Test></Add_Test>
             },
         ]
     },

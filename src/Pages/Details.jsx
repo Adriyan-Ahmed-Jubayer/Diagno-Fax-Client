@@ -10,13 +10,20 @@ const Details = () => {
     const {User} = useContext(AuthContext);
     const { id } = useParams();
     const [data, setData] = useState({});
+    const [userData, setUserData] = useState({});
     const Test = () => {
         axios.get(`http://localhost:5000/tests/${id}`)
             .then(res => setData(res.data))
             .catch(err => toast.error(err?.message ? err.message : err))
     }
+    const bringUser = () => {
+        axios.get(`http://localhost:5000/singel/users?email=${User.email}`)
+            .then(res => setUserData(res.data))
+            .catch(err => toast.error(err?.message ? err.message : err))
+    }
     useEffect(() => {
         Test();
+        bringUser()
     }, [])
     const { _id, name, price, description, image, available_slots, available_date } = data;
 
@@ -25,6 +32,10 @@ const Details = () => {
         if(available_slots == 0 || available_date < 0){
             toast.info('Sorry ! Slots Unavailable')
             return
+        }
+        if(userData.status === 'blocked'){
+            toast.error('Sorry! You are Blocked')
+            return;
         }
         const report = 'pending';
         const email = User.email;

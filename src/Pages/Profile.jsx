@@ -13,12 +13,19 @@ const Profile = () => {
     const [user, setUser] = useState({})
     const [District, setDistrict] = useState([])
     const [Upzila, setUpzila] = useState([])
+    const [show, setShow] = useState(true)
     const PublicKey = usePublicApi();
+
+
+
     const bringUser = () => {
-        fetch(`http://localhost:5000/single/user?email=${User.email}`)
+        fetch(`http://localhost:5000/single/user?email=${User?.email}`)
             .then(res => res.json())
             .then(data => setUser(data))
     }
+
+
+
     useEffect(() => {
         bringUser();
         fetch('http://localhost:5000/districts')
@@ -28,7 +35,9 @@ const Profile = () => {
             .then(res => res.json())
             .then(data => setUpzila(data))
     }, [])
-    const [show, setShow] = useState(true)
+
+
+
     const handleUpdate = async (data) => {
         Swal.fire({
             title: "Do you want to save the changes?",
@@ -37,7 +46,7 @@ const Profile = () => {
             confirmButtonText: "Save",
             denyButtonText: `Don't save`
         }).then(async(result) => {
-            /* Read more about isConfirmed, isDenied below */
+
             if (result.isConfirmed) {
                 const file = { image: data.image[0] };
                 const res = await PublicKey.post(imageHostingApi, file, {
@@ -45,7 +54,10 @@ const Profile = () => {
                         'content-type': 'multipart/form-data'
                     }
                 })
+
+
                 if (res.data.success) {
+                    
                     const userData = {
                         name: data.name,
                         email: data.email,
@@ -55,6 +67,7 @@ const Profile = () => {
                         upozila: data.upozila,
                         image: res.data.data.display_url
                     }
+
                     fetch(`http://localhost:5000/user?id=${user._id}`, {
                         method: "PUT",
                         headers: {
