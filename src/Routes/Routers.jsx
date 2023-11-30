@@ -14,11 +14,14 @@ import Appointments from '../Pages/Appointments';
 import Users from '../Pages/Users';
 import AdminProtector from '../Providers/Admin/AdminProtector';
 import Add_Test from '../Pages/Add_Test';
+import All_Test from '../Pages/All_Test';
+import Error from '../Pages/Error';
 
 const Routers = createBrowserRouter([
     {
         path: "/",
         element: <Root></Root>,
+        errorElement: <Error></Error>,
         children: [
             {
                 path: "/",
@@ -37,6 +40,7 @@ const Routers = createBrowserRouter([
     {
         path: "/authentication",
         element: <Authentication></Authentication>,
+        errorElement: <Error></Error>,
         children: [
             {
                 path: "/authentication/signin",
@@ -51,6 +55,7 @@ const Routers = createBrowserRouter([
     {
         path: "/dashboard",
         element: <Dashboard></Dashboard>,
+        errorElement: <Error></Error>,
         children: [
             {
                 path: "profile",
@@ -67,6 +72,10 @@ const Routers = createBrowserRouter([
             {
                 path: "/dashboard/add-test",
                 element: <Add_Test></Add_Test>
+            },
+            {
+                path: "/dashboard/all-tests",
+                element: <All_Test></All_Test>
             },
         ]
     },

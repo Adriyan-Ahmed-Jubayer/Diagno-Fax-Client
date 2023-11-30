@@ -4,10 +4,10 @@ import Search from "../Components/All Tests/Search";
 const TestList = () => {
     return (
         <>
-            <section className="container mx-auto">
-                <Search></Search>
-            </section>
-            <section className="container mx-auto">
+            <section className="container mx-auto mt-20 space-y-16">
+                <section >
+                    <Search></Search>
+                </section>
                 <MediTest></MediTest>
             </section>
         </>

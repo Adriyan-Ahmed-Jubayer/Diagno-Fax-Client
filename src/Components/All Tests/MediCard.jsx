@@ -4,7 +4,7 @@ import { MdMan } from "react-icons/md";
 import { CiCalendar } from "react-icons/ci";
 
 const MediCard = ({ test }) => {
-    const { _id, name, price, description, image, available_slots, available_date } = test;
+    const { _id, name, price, description, image, available_slots, available_date, valid_data } = test;
     return (
         <>
             <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className="p-5 btn-border lg:flex lg:gap-6 border-[#8D53FD] border rounded-md ">
@@ -18,7 +18,7 @@ const MediCard = ({ test }) => {
                             <h1 className="text-sm md:text-base lg:text-xl font-bold flex items-center gap-2 "><span className="font-medium"><LuDollarSign></LuDollarSign></span> {price}</h1>
                             <h1 className="text-sm md:text-base lg:text-xl font-bold flex items-center gap-2 "><span className="font-medium"><MdMan></MdMan></span> {available_slots}</h1>
                         </div>
-                        <h1 className="text-sm md:text-base lg:text-xl font-bold flex items-center gap-2 "><span className="font-medium"><CiCalendar /></span> {available_date} Days</h1>
+                        <h1 className="text-sm md:text-base lg:text-xl font-bold flex items-center gap-2 "><span className="font-medium"><CiCalendar /></span> {valid_data}</h1>
                         <div>
                             <p>{description && description.slice(0, 120)} ...</p>
                         </div>

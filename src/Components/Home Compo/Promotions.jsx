@@ -1,4 +1,7 @@
 import Section_Heading from "../../Shared/Section Heading/Section_Heading";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import { CardActionArea } from "@mui/material";
 
 const Promotions = () => {
     return (
@@ -11,6 +14,74 @@ const Promotions = () => {
                         <h1 className='text-xl md:text-2xl lg:text-3xl font-bold'>Job Opportunities</h1>
                         <p className="text-[12px] md:text-[14px] lg:text-[16px] leading-5 md:leading-7 lg:leading-8 text-gray-500">We provide our customers with access to a vast and diverse range of job opportunities across various industries and sectors.</p>
                     </div>
+                    <Card sx={{ maxWidth: 345 }}>
+                        <CardActionArea>
+                            <img
+                                src="https://img.freepik.com/free-vector/flat-world-health-day-celebration-illustration_23-2148885957.jpg?w=740&t=st=1701129866~exp=1701130466~hmac=0c1cc795645b35c43b31d275f1107b8a9dfe652fc0a55eee7b84d366e0859d5f"
+                                alt=""
+                                className="w-auto h-24 rounded-full mx-auto mb-4"
+                            />
+                            <CardContent>
+                                <p className="text-gray-700 text-sm font-bold text-center">
+                                Job Opportunities
+                                </p>
+                            </CardContent>
+                            <CardContent>
+                                <p className="text-gray-700 text-sm font-bold text-center">We provide our customers with access to a vast and diverse range of job opportunities across various industries and sectors.</p>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                    <Card sx={{ maxWidth: 345 }}>
+                        <CardActionArea>
+                            <img
+                                src="https://img.freepik.com/free-psd/gradient-arrows-design_23-2150390307.jpg?w=740&t=st=1701130166~exp=1701130766~hmac=38d1527766fc1449b9efe682ce80be583ecf0f3b32f4e9a05f7cfa5c6d6d9577"
+                                alt=""
+                                className="w-auto h-24 rounded-full mx-auto mb-4"
+                            />
+                            <CardContent>
+                                <p className="text-gray-700 text-sm font-bold text-center">
+                                Search and Filtering
+                                </p>
+                            </CardContent>
+                            <CardContent>
+                                <p className="text-gray-700 text-sm font-bold text-center">We provide our customers with access to a vast and diverse range of job opportunities across various industries and sectors.</p>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                    <Card sx={{ maxWidth: 345 }}>
+                        <CardActionArea>
+                            <img
+                                src="https://img.freepik.com/free-vector/flat-world-health-day-celebration-illustration_23-2148885957.jpg?w=740&t=st=1701129866~exp=1701130466~hmac=0c1cc795645b35c43b31d275f1107b8a9dfe652fc0a55eee7b84d366e0859d5f"
+                                alt=""
+                                className="w-auto h-24 rounded-full mx-auto mb-4"
+                            />
+                            <CardContent>
+                                <p className="text-gray-700 text-sm font-bold text-center">
+                                Job Opportunities
+                                </p>
+                            </CardContent>
+                            <CardContent>
+                                <p className="text-gray-700 text-sm font-bold text-center">We provide our customers with access to a vast and diverse range of job opportunities across various industries and sectors.</p>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                    <Card sx={{ maxWidth: 345 }}>
+                        <CardActionArea>
+                            <img
+                                src="https://img.freepik.com/free-vector/flat-world-health-day-celebration-illustration_23-2148885957.jpg?w=740&t=st=1701129866~exp=1701130466~hmac=0c1cc795645b35c43b31d275f1107b8a9dfe652fc0a55eee7b84d366e0859d5f"
+                                alt=""
+                                className="w-auto h-24 rounded-full mx-auto mb-4"
+                            />
+                            <CardContent>
+                                <p className="text-gray-700 text-sm font-bold text-center">
+                                Job Opportunities
+                                </p>
+                            </CardContent>
+                            <CardContent>
+                                <p className="text-gray-700 text-sm font-bold text-center">We provide our customers with access to a vast and diverse range of job opportunities across various industries and sectors.</p>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
                     <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" className="p-7  rounded-xl text-[#8D53FD] border-[#8D53FD] border-2 space-y-2">
                         <img src="https://img.freepik.com/free-psd/gradient-arrows-design_23-2150390307.jpg?w=740&t=st=1701130166~exp=1701130766~hmac=38d1527766fc1449b9efe682ce80be583ecf0f3b32f4e9a05f7cfa5c6d6d9577" className=" h-12 w-12" alt="" />
                         <h1 className='text-xl md:text-2xl lg:text-3xl font-bold'>Search and Filtering</h1>

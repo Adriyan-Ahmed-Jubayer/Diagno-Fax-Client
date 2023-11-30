@@ -13,19 +13,19 @@ import { PiFlagBanner } from "react-icons/pi";
 import { GiTatteredBanner } from "react-icons/gi";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AiOutlineHome } from "react-icons/ai";
 import axios from "axios";
 
 const Dashboard = () => {
     const { User, LogOutAccount } = useContext(AuthContext);
     const [userData, setUserData] = useState({})
-    const bringUser = () => {
-        axios.get(`http://localhost:5000/single/user?email=${User?.email}`)
+    useEffect(() => {
+        if(User){
+            axios.get(`http://localhost:5000/single/user?email=${User?.email}`)
             .then(res => setUserData(res.data))
             .catch(err => toast.error(err?.message ? err.message : err))
-    }
-    useEffect(() => {
-        bringUser()
-    }, [])
+        }
+    }, [User])
     return (
         <section className="lg:container mx-auto">
             <div className="navbar py-3 md:py-4 lg:py-6 relative bg-white max-w-[1920px] mx-auto">
@@ -95,7 +95,7 @@ const Dashboard = () => {
                                 <NavLink className={({ isActive }) => isActive ? `bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD] md:py-3.5 md:px-5 text-white font-bold text-xs md:text-sm  rounded flex items-center gap-3` : `bg-transparent md:py-3.5 md:px-5 font-bold text-xs md:text-sm  rounded flex items-center gap-3`} to="/dashboard/all-Banners" ><GiTatteredBanner className="text-xl"></GiTatteredBanner>ALL BANNERS</NavLink></>
                             }
                             <hr />
-                            <NavLink className={({ isActive }) => isActive ? `bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD] md:py-3.5 md:px-5 text-white font-bold text-xs md:text-sm  rounded flex items-center gap-3` : `bg-transparent md:py-3.5 md:px-5 font-bold text-xs md:text-sm  rounded flex items-center gap-3`} to="/" ><VscAccount className="text-xl"></VscAccount>HOME</NavLink>                     
+                            <NavLink className={({ isActive }) => isActive ? `bg-gradient-to-l from-[#8D53FD] to-[#9E6EFD] md:py-3.5 md:px-5 text-white font-bold text-xs md:text-sm  rounded flex items-center gap-3` : `bg-transparent md:py-3.5 md:px-5 font-bold text-xs md:text-sm  rounded flex items-center gap-3`} to="/" ><AiOutlineHome className="text-xl"></AiOutlineHome>HOME</NavLink>                     
                         </div>
                     </nav>
 
